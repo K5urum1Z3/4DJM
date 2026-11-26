@@ -1,0 +1,5 @@
+flash_attn==2.8.3.post1
+flash-linear-attention==0.5.2
+fla-core==0.5.2
+tilelang==0.1.11
+triton==3.4.0

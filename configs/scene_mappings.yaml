@@ -1,0 +1,176 @@
+version: 1
+project_root: .
+sources:
+  D3DG:
+    kind: image_sequence
+    default_fps: 30.0
+    view_glob: '{path}/ims/*'
+    frame_glob: '*.jpg'
+    scenes:
+      scene001:
+        path: raw/D3DG/data/basketball
+      scene002:
+        path: raw/D3DG/data/boxes
+      scene003:
+        path: raw/D3DG/data/football
+      scene004:
+        path: raw/D3DG/data/juggle
+      scene005:
+        path: raw/D3DG/data/softball
+      scene006:
+        path: raw/D3DG/data/tennis
+  n3dv:
+    kind: video
+    view_glob: '{path}/*.mp4'
+    scenes:
+      scene001:
+        path: raw/N3DV/data/coffee_martini
+      scene002:
+        path: raw/N3DV/data/cook_spinach
+      scene003:
+        path: raw/N3DV/data/cut_roasted_beef
+      scene004:
+        path: raw/N3DV/data/flame_salmon_1
+      scene005:
+        path: raw/N3DV/data/flame_steak
+      scene006:
+        path: raw/N3DV/data/sear_steak
+  Harmony4D:
+    kind: image_sequence
+    default_fps: 30.0
+    view_glob: '{path}/exo/cam*/images'
+    frame_glob: '*.jpg'
+    scenes:
+      scene001:
+        path: raw/Harmony4D/data/01_hugging/001_hugging
+      scene002:
+        path: raw/Harmony4D/data/10_karate2/002_karate2
+      scene003:
+        path: raw/Harmony4D/data/03_grappling2/003_grappling2
+      scene004:
+        path: raw/Harmony4D/data/09_karate/004_karate
+      scene005:
+        path: raw/Harmony4D/data/09_karate/005_karate
+      scene006:
+        path: raw/Harmony4D/data/09_karate/006_karate
+      scene007:
+        path: raw/Harmony4D/data/09_karate/007_karate
+      scene008:
+        path: raw/Harmony4D/data/09_karate/008_karate
+      scene009:
+        path: raw/Harmony4D/data/09_karate/009_karate
+      scene010:
+        path: raw/Harmony4D/data/02_grappling/010_grappling
+      scene011:
+        path: raw/Harmony4D/data/04_sword_part2/011_sword
+      scene012:
+        path: raw/Harmony4D/data/02_grappling/012_grappling
+      scene013:
+        path: raw/Harmony4D/data/04_sword_part2/013_sword
+      scene014:
+        path: raw/Harmony4D/data/04_sword_part2/014_sword
+      scene015:
+        path: raw/Harmony4D/data/04_sword_part2/015_sword
+      scene016:
+        path: raw/Harmony4D/data/04_sword_part2/016_sword
+  UCSD:
+    kind: video
+    view_glob: '{path}/cam*.mp4'
+    scenes:
+      scene001:
+        path: raw/UCSD/raw_video/1080p/2_10/scene00
+      scene002:
+        path: raw/UCSD/raw_video/1080p/2_10/scene01
+      scene003:
+        path: raw/UCSD/raw_video/1080p/2_10/scene02
+      scene004:
+        path: raw/UCSD/raw_video/2_7k/2_10/scene020
+      scene005:
+        path: raw/UCSD/raw_video/2_7k/2_10/scene021
+      scene006:
+        path: raw/UCSD/raw_video/2_7k/2_10/scene022
+      scene007:
+        path: raw/UCSD/raw_video/2_7k/2_10/scene023
+      scene008:
+        path: raw/UCSD/raw_video/2_7k/2_10/scene024
+      scene009:
+        path: raw/UCSD/raw_video/2_7k/2_10/scene025
+      scene010:
+        path: raw/UCSD/raw_video/2_7k/2_10/scene026
+      scene011:
+        path: raw/UCSD/raw_video/1080p/2_10/scene03
+      scene012:
+        path: raw/UCSD/raw_video/1080p/2_10/scene04
+      scene013:
+        path: raw/UCSD/raw_video/1080p/2_10/scene05
+      scene014:
+        path: raw/UCSD/raw_video/1080p/2_10/scene06
+      scene015:
+        path: raw/UCSD/raw_video/1080p/2_10/scene07
+      scene016:
+        path: raw/UCSD/raw_video/1080p/2_10/scene08
+      scene017:
+        path: raw/UCSD/raw_video/1080p/2_10/scene09
+      scene018:
+        path: raw/UCSD/raw_video/1080p/2_10/scene10
+      scene019:
+        path: raw/UCSD/raw_video/1080p/2_10/scene11
+      scene020:
+        path: raw/UCSD/raw_video/1080p/2_10/scene12
+      scene021:
+        path: raw/UCSD/raw_video/2_7k/2_10/scene14
+      scene022:
+        path: raw/UCSD/raw_video/2_7k/2_10/scene15
+      scene023:
+        path: raw/UCSD/raw_video/2_7k/2_10/scene16
+      scene024:
+        path: raw/UCSD/raw_video/2_7k/2_10/scene17
+      scene025:
+        path: raw/UCSD/raw_video/2_7k/2_10/scene18
+      scene026:
+        path: raw/UCSD/raw_video/2_7k/2_10/scene19
+      scene027:
+        path: raw/UCSD/raw_video/1080p/2_24/scene001
+      scene028:
+        path: raw/UCSD/raw_video/1080p/2_24/scene002
+      scene029:
+        path: raw/UCSD/raw_video/1080p/2_24/scene003
+      scene030:
+        path: raw/UCSD/raw_video/1080p/2_24/scene004
+      scene031:
+        path: raw/UCSD/raw_video/1080p/2_24/scene005
+      scene032:
+        path: raw/UCSD/raw_video/1080p/2_24/scene006
+      scene033:
+        path: raw/UCSD/raw_video/1080p/2_24/scene007
+  immersive:
+    kind: video
+    view_glob: '{path}/camera_*.mp4'
+    scenes:
+      scene001:
+        path: raw/Immersive/data/01_Welder
+      scene002:
+        path: raw/Immersive/data/02_Flames
+      scene003:
+        path: raw/Immersive/data/09_Alexa_Meade_Exhibit
+        mapping_note: benchmark logical alias verified by content and frame range
+      scene004:
+        path: raw/Immersive/data/04_Truck
+      scene005:
+        path: raw/Immersive/data/05_Horse
+      scene006:
+        path: raw/Immersive/data/06_Goats
+      scene007:
+        path: raw/Immersive/data/07_Car
+      scene009:
+        path: raw/Immersive/data/09_Alexa_Meade_Exhibit
+      scene010:
+        path: raw/Immersive/data/10_Alexa_Meade_Face_Paint_1
+      scene011:
+        path: raw/Immersive/data/11_Alexa_Meade_Face_Paint_2
+      scene012:
+        path: raw/Immersive/data/12_Cave
+      scene013:
+        path: raw/Immersive/data/13_Birds
+      scene014:
+        path: raw/Immersive/data/14_Puppy

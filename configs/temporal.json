@@ -1,0 +1,158 @@
+{
+  "seed": 20250905,
+  "paths": {
+    "project_root": ".",
+    "model": "models/Qwen3.5-9B",
+    "mapping": "configs/scene_mappings.yaml",
+    "train_annotations": "annotations/train.json",
+    "validation_annotations": "annotations/validation.json",
+    "test_annotations": "annotations/test.json",
+    "output_dir": "outputs/temporal",
+    "baseline_checkpoint": "outputs/language/checkpoints/best",
+    "stage1_v2_checkpoint": "outputs/evidence/checkpoints/best"
+  },
+  "model": {
+    "architecture": "qwen3_5",
+    "model_class": "Qwen3_5ForConditionalGeneration",
+    "attention_backend": "flash_attention_2",
+    "linear_attention_backend": "fla",
+    "torch_dtype": "bfloat16",
+    "use_cache": false,
+    "gradient_checkpointing": true,
+    "use_kernels": false
+  },
+  "lora": {
+    "enabled": true,
+    "target_modules": [
+      "q_proj",
+      "v_proj",
+      "in_proj_qkv"
+    ],
+    "target_scope": "language_model.layers.*",
+    "include_linear_attention": true,
+    "r": 16,
+    "alpha": 32,
+    "dropout": 0.05,
+    "bias": "none"
+  },
+  "classifier": {
+    "input_dim": 4096,
+    "hidden_dim": 512,
+    "dropout": 0.1,
+    "activation": "gelu"
+  },
+  "loss": {
+    "answer_loss_weight": 1.0,
+    "reason_loss_weight": 0.2
+  },
+  "training": {
+    "batch_size": 1,
+    "gradient_accumulation_steps": 8,
+    "effective_batch_size": 8,
+    "evaluation_batch_size": 1,
+    "num_workers": 0,
+    "epochs": 2,
+    "optimizer": "adamw",
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eps": 1e-08,
+    "lora_learning_rate": 1e-06,
+    "stage1_learning_rate": 0.0,
+    "lora_weight_decay": 0.0,
+    "stage1_weight_decay": 0.01,
+    "scheduler": "cosine",
+    "warmup_ratio": 0.03,
+    "max_grad_norm": 1.0,
+    "validate_every_steps": 500,
+    "save_every_steps": 500,
+    "threshold": 0.5,
+    "best_metric": "validation_macro_f1",
+    "freeze_stage1": false,
+    "stage3_learning_rate": 0.0005,
+    "stage3_weight_decay": 0.01,
+    "retain_step_checkpoints": true,
+    "freeze_stage1_custom": true,
+    "train_qwen_language_lora": true
+  },
+  "video": {
+    "num_frames": 16,
+    "sampling": "uniform",
+    "grid_rows": 7,
+    "grid_cols": 7,
+    "tile_size": 96,
+    "mosaic_size": [
+      672,
+      672
+    ],
+    "resize": "preserve_aspect_ratio_with_black_padding",
+    "processor_do_resize": false,
+    "processor_do_sample_frames": false,
+    "processor_cap_pixels_per_frame": false
+  },
+  "input": {
+    "use_reason_as_assistant_target": true,
+    "use_reason_as_classifier_input": false,
+    "use_answer_as_input": false,
+    "use_capability_as_input": false,
+    "use_evidence_time_ids_for_sampling": false,
+    "enable_thinking": false
+  },
+  "performance": {
+    "cache_visual_features": true,
+    "pin_memory": true,
+    "prefetch_batches": 2,
+    "reason_token_chunk": 64
+  },
+  "prompt": {
+    "template": "You are given a multi-view video of a dynamic scene and an assertion about the scene.\n\nDetermine whether the assertion is true or false based only on the visual evidence in the video, and explain the visual evidence supporting your judgment.\n\nAssertion:\n{assertion}"
+  },
+  "stage1": {
+    "version": "v2",
+    "evidence_scorer_type": "visual_only_r",
+    "init_mode": "stage1_v2_best_warmstart",
+    "num_semantic_units": 8,
+    "attention_dim": 256,
+    "num_attention_heads": 8,
+    "evidence_hidden_dim": 128,
+    "head_hidden_dim": 128,
+    "dropout": 0.1,
+    "occurrence_temperature": 0.25,
+    "visual_representation": "unified_mosaic_spatial_tokens",
+    "recover_view_axis": false
+  },
+  "stage": 3,
+  "freeze_stage1_v2": true,
+  "load_stage2_trained_weights": false,
+  "stage3": {
+    "architecture": "MULTI_PATTERN_MULTI_SCALE_CENTERED_RELATIVE_MATCHING",
+    "num_patterns": 4,
+    "num_scales": 2,
+    "temporal_pool_type": "avg",
+    "temporal_pool_kernel": 2,
+    "temporal_pool_stride": 2,
+    "relative_matching": "centered_cosine",
+    "pattern_length": 4,
+    "pattern_dim": 256,
+    "pattern_num_heads": 8,
+    "tau_pattern": 1.0,
+    "tau_cfg": 0.1,
+    "matcher_eps": 1e-08,
+    "head_hidden_dim": 128,
+    "dropout": 0.1
+  },
+  "variant": "stage3_frozen_stage1_custom_trainable_language_lora",
+  "stage3_lora_execution": {
+    "use_cached_stage1_outputs": false,
+    "lazy_video_cache": true,
+    "causal_logit_atol": 0.0001,
+    "causal_logit_rtol": 0.0001
+  },
+  "lora_execution": {
+    "use_cached_stage1_outputs": false,
+    "lazy_video_cache": true,
+    "causal_logit_atol": 0.0001,
+    "causal_logit_rtol": 0.0001
+  }
+}
